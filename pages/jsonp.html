@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>JSONP</title>
+	</head>
+	<body>
+		<!--<script>
+			var ajax = function(){
+				var id = 0,
+					body = document.body;
+				function serialize(obj){
+					var result = [],
+						a;
+					for(a in obj){
+						result.push([a, "=", obj[a]].join(""));
+					}
+					return result.join("&");
+				}
+				return function(options){
+					id++;
+					var jsonp = options.jsonp,
+						url = options.url,
+						data = options.data,
+						dataType = options.dataType || "json",
+						success = (options.success || function(){}).bind(options),
+						error = (options.error || function(){}).bind(options);
+					if(jsonp){
+						var script = document.createElement("script"),
+							data = serialize(data);
+						script.src = [url, "?type=jsonp&id=", id, [["&", data].join(""), ""][+!data.length]].join("");
+						window[["jsonpCallback_", id].join("")] = [
+							success,
+							function(data){
+								success(eval("(" + data + ")"));
+							}
+						][+(dataType === "json")];
+						return body.appendChild(script);
+					}
+					var xhr = new XMLHttpRequest,
+						type = options.type || "get",
+						headers = options.headers || {
+							"Content-Type": "application/x-www-form-urlencoded"
+						},
+						a;
+					xhr.onreadystatechange = function(){
+						if(xhr.readyState === 4){
+							if(xhr.status >= 200 && xhr.status < 300){
+								success(dataType === "json" ? eval("("+ xhr.responseText + ")") : xhr.responseText);
+							}else{
+								error(xhr.responseText);
+							}
+						}
+					};
+					xhr.open(type, [url, "?", ["", serialize(data)][+(type === "get")]].join(""), options.async || 1);
+					for(a in headers){
+						xhr.setRequestHeader(a, headers[a]);
+					}
+					xhr.send([serialize(data), null][+(type === "get")]);
+				};
+			}();
+			ajax({
+				type: "get",// optional
+				url: "http://127.0.0.1:23333/api/get_banner/home",
+				headers: {
+					"Content-Type": "application/x-www-form-urlencoded"
+				},// optional
+				async: 1,// optional
+				data: {
+					a: 1,
+					b: 2
+				},// optional
+				dataType: "text",// optional
+				jsonp: 1,// optional
+				success: function(data){
+					console.log(data);
+				},// optional
+				error: function(err){
+					console.log(err);
+				}// optional
+			});
+		</script>-->
+		<script>
+			//fetch
+			const fetch = window.fetch || (() => {
+				let id = 0;
+				const body = document.body;
+				const serialize = obj => Object.keys(obj).reduce((result, curr) => {
+					result.push(`${curr}=${obj[curr]}`);
+					return result;
+				}, []).join("&");
+				const format = data => ({
+					text: () => Promise.resolve(JSON.stringify(data)),
+					json: () => Promise.resolve(JSON.parse(JSON.stringify(data)))
+				});
+				return (url, {
+					method = "get",
+					data = {},
+					async = 1,
+					jsonp,
+					headers = [
+						,
+						{
+							"Content-Type": "application/x-www-form-urlencoded"
+						}
+					][+(method === "post")]
+				}) => new Promise((resolve, reject) => {
+					if(jsonp){
+						const script = document.createElement("script");
+						data = serialize(data);
+						script.src = `${url}?type=jsonp&id=${id}${[`&${data}`, ""][+!data.length]}`;
+						window[["jsonpCallback_", id].join("")] = data => {
+							resolve(format(data));
+						};
+						body.appendChild(script);
+						return id++;
+					}
+					const xhr = new XMLHttpRequest;
+					xhr.onreadystatechange = () => {
+						if(xhr.readyState === 4){
+							if(xhr.status >= 200 && xhr.status < 300){
+								resolve(format(xhr.responseText));
+							}else{
+								reject(xhr.responseText);
+							}
+						}
+					};
+					xhr.open(method, `${url}${["", `?${serialize(data)}`][+(type === "get")]}`, async);
+					for(let a in headers){
+						xhr.setRequestHeader(a, headers[a]);
+					}
+					xhr.send([serialize(data), null][+(method === "get")]);
+				});
+			})();
+			_fetch("http://127.0.0.1:23333/api/get_banner/home", {
+				method: "get",// optional
+				headers: {
+					"Content-Type": "application/x-www-form-urlencoded"
+				},// optional
+				async: 1,// optional
+				data: {
+					a: 1,
+					b: 2
+				},// optional
+				jsonp: 1,// optional
+			}).then(({json}) => json()).then(data => console.log(data));
+		</script>
+	</body>
+</html>
