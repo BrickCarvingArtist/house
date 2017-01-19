@@ -1,9 +1,9 @@
 <style lang="stylus" scoped>
-	$orange=#e63700
-	$lightOrange=$orange + 50
+	$orange=#ff6932
 	footer
 		position fixed
 		bottom 0
+		z-index 1
 		background-color white
 		a
 			float left
@@ -21,13 +21,13 @@
 				.icon
 					color $orange
 				span
-					color $lightOrange
+					color $orange
 			div
 				margin-top .2875rem
 				display inline-block
 				width 2.375rem
 				height 2.0625rem
-				background-color $lightOrange
+				background-color $orange
 				border-radius .1875rem
 				.icon
 					width 1.4125rem

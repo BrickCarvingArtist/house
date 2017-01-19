@@ -4,6 +4,7 @@
 	.banner
 		position relative
 		height 17.0625rem
+		overflow hidden
 		a
 			position absolute
 			top 0
@@ -13,9 +14,9 @@
 			height @height
 			background-size 100% 100%
 			&.current
-				animation rightToLeftIn 1s linear forwards
+				animation rightToLeftIn .4s linear forwards
 			&.previous
-				animation rightToLeftOut 1s linear forwards
+				animation rightToLeftOut .4s linear forwards
 		div
 			position absolute
 			bottom .5625rem

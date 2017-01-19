@@ -87,4 +87,20 @@ router
 			message: "ok"
 		});
 	});
+router
+	.route("/api/favorite/add")
+	.get(({query}, res) => {
+		res.json({
+			code: [0, 1][+!query.id],
+			message: "ok"
+		});
+	});
+router
+	.route("/api/favorite/remove")
+	.get(({query}, res) => {
+		res.json({
+			code: [0, 1][+!query.id],
+			message: "ok"
+		});
+	});
 export default router;

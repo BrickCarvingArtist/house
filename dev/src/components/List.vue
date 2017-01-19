@@ -1,6 +1,5 @@
 <style lang="stylus" scoped>
-	$orange=#e63700
-	$lightOrange=$orange + 50
+	$orange=#ff6932
 	li
 		position relative
 		display block
@@ -12,7 +11,7 @@
 		background-position .625rem .625rem
 		background-repeat no-repeat
 		background-size 6.875rem 4.8125rem
-		border-bottom 1px solid #e5e6e9
+		border-bottom 1px solid #eee
 	h1
 		font-size 1rem
 		color #333
@@ -24,7 +23,7 @@
 				&:before
 					content "¥"
 					font-size .75rem
-					color $lightOrange
+					color $orange
 			em
 				font-size .75rem
 				color #666
@@ -50,7 +49,7 @@
 				<em>元／平米／天起</em>
 			</span>
 			<span>{{`${item.commission}个月`}}</span>
-			<svg class="icon" aria-hidden="true" @click.stop="addFavorite">
+			<svg class="icon" aria-hidden="true" @click.stop="addFavorite(item.id,$event)">
 				<use xlink:href="#icon-favorites"></use>
 			</svg>
 		</li>
@@ -60,8 +59,16 @@
 	export default {
 		props: ["data"],
 		methods: {
-			addFavorite(e){
-				e.target.classList.toggle("current");
+			async addFavorite(id, {target}){
+				if(target.classList.contains("current")){
+					if(!(await (await fetch(`/api/favorite/remove?id=${id}`)).json()).code){
+						target.classList.remove("current");
+					}
+				}else{
+					if(!(await (await fetch(`/api/favorite/add?id=${id}`)).json()).code){
+						target.classList.add("current");
+					}
+				}
 			},
 			showDetails(href){
 				this.$router.push(href);
