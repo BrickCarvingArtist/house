@@ -11,6 +11,12 @@
 	a
 		text-decoration none
 		color inherit
+	h1
+	h2
+	h3
+	h4
+	h5
+	h6
 	b
 		font-weight normal
 	em
@@ -21,7 +27,7 @@
 	textarea
 		resize none
 	body
-		background-color #efeff4
+		background-color #eee
 	.icon
 		width 1.2rem
 		height 1.2rem

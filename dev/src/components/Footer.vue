@@ -13,7 +13,7 @@
 			border-top 1px solid #e5e5e5
 			text-align center
 			font-size .64rem
-			color #b4b4b4
+			color #bbb
 			.icon
 				display block
 				margin .32rem auto .16rem

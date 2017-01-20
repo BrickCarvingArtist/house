@@ -1,9 +1,9 @@
 <style lang="stylus" scoped>
-	.home
+	div
 		padding-bottom 3.125rem
 </style>
 <template>
-	<div class="home">
+	<div>
 		<banner action="/api/get_banner/home" />
 		<search ref="search" />
 		<my-filter />
@@ -12,11 +12,11 @@
 	</div>
 </template>
 <script>
-	import Banner from "../components/Banner";
-	import Search from "../components/Search";
-	import MyFilter from "../components/Filter";
-	import Modal from "../components/Modal";
-	import List from "../components/List";
+	import Banner from "../../components/Banner";
+	import Search from "./components/Search";
+	import MyFilter from "./components/Filter";
+	import Modal from "../../components/Modal";
+	import List from "../../components/List";
 	export default {
 		data(){
 			return {

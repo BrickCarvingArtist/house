@@ -13,32 +13,32 @@ router
 			case "home":
 				data = [
 					{
-						url: "/images/banner/1.png",
-						href: "/activity/1"
+						id: "1",
+						url: "/images/banner/1.png"
 					},
 					{
-						url: "/images/banner/2.png",
-						href: "/activity/2"
+						id: "2",
+						url: "/images/banner/2.png"
 					},
 					{
-						url: "/images/banner/3.png",
-						href: "/activity/3"
+						id: "4",
+						url: "/images/banner/4.png"
 					},
 					{
-						url: "/images/banner/4.png",
-						href: "/activity/4"
+						id: "3",
+						url: "/images/banner/3.png"
 					}
 				];
 				break;
 			case "me":
 				data = [
 					{
-						url: "/images/banner/1.png",
-						href: "/activity/1"
+						id: "2",
+						url: "/images/banner/2.png"
 					},
 					{
-						url: "/images/banner/2.png",
-						href: "/activity/2"
+						id: "1",
+						url: "/images/banner/1.png"
 					}
 				];
 		}
@@ -100,6 +100,52 @@ router
 	.get(({query}, res) => {
 		res.json({
 			code: [0, 1][+!query.id],
+			message: "ok"
+		});
+	});
+router
+	.route("/api/requirement/:type")
+	.get((req, res) => {
+		let data = [
+			{
+				id: "12342307501",
+				title: "一个新的租房需求5",
+				type: "1",
+				description: "外滩SOHO，200平米写字楼，外滩SOHO，200平米写字楼，外滩SOHO，200平米写字楼，外滩SOHO，200平米写字楼，外滩SOHO，200平米写字楼",
+				time: Date.now()
+			},
+			{
+				id: "12392307501",
+				title: "一个新的租房需求4",
+				type: "3",
+				description: "内滩SOHO，200平米写字楼，外滩SOHO，200平米写字楼，外滩SOHO，200平米写字楼，外滩SOHO，200平米写字楼，外滩SOHO，200平米写字楼",
+				time: Date.now()
+			},
+			{
+				id: "92342307501",
+				title: "两个新的租房需求",
+				type: "0",
+				description: "外滩SOHO，2平米写字楼，外滩SOHO，200平米写字楼，外滩SOHO，200平米写字楼，外滩SOHO，200平米写字楼，外滩SOHO，200平米写字楼",
+				time: Date.now()
+			},
+			{
+				id: "12395507501",
+				title: "一个新的租房需求4",
+				type: "3",
+				description: "内滩SOHO，200平米写字楼，外滩SOHO，200平米写字楼，外滩SOHO，200平米写字楼，外滩SOHO，200平米写字楼，外滩SOHO，200平米写字楼",
+				time: Date.now()
+			},
+			{
+				id: "92348807501",
+				title: "三个新的租房需求",
+				type: "2",
+				description: "外滩SOHO，20平米写字楼，外滩SOHO，200平米写字楼，外滩SOHO，200平米写字楼，外滩SOHO，200平米写字楼，外滩SOHO，200平米写字楼",
+				time: Date.now()
+			}
+		];
+		res.json({
+			code: 0,
+			data,
 			message: "ok"
 		});
 	});

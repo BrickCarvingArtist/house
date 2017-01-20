@@ -56,7 +56,7 @@
 </style>
 <template>
 	<div class="banner">
-		<router-link v-for="(item,$index) of data" :to="item.href" :class="{'current':index===$index,'previous':(index?index-1:lastIndex)===$index}" :style="`background-image:url(${item.url})`" />
+		<router-link v-for="(item,$index) of data" :to="`/house/${item.id}`" :class="{'current':index===$index,'previous':(index?index-1:lastIndex)===$index}" :style="`background-image:url(${item.url})`" />
 		<div>
 			<em v-for="(item,$index) of data" :class="{'current':index===$index}"></em>
 		</div>
