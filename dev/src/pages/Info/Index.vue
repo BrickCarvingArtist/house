@@ -1,9 +1,5 @@
-<style lang="stylus" scoped>
-	div
-		padding-bottom 3.125rem
-</style>
 <template>
-	<div>
+	<div class="withFooter">
 		<my-header />
 		<router-view />
 	</div>

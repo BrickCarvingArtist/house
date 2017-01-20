@@ -7,6 +7,7 @@
 		border-bottom 1px solid #ddd
 		a
 			flex 1
+			margin-right -1px
 			height 1.5625rem
 			border 1px solid $orange
 			text-align center

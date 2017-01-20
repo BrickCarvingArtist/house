@@ -28,6 +28,8 @@
 		resize none
 	body
 		background-color #eee
+	.withFooter
+		padding-bottom 3.125rem
 	.icon
 		width 1.2rem
 		height 1.2rem
