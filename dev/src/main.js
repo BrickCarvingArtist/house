@@ -1,13 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
 import App from "./App";
-import Home from "./pages/Home/Index";
-import Order from "./pages/Order/Index";
-import Info from "./pages/Info/Index";
-import Message from "./pages/Info/Message";
-import Notice from "./pages/Info/Notice";
-import Requirement from "./pages/Info/Requirement";
-import Me from "./pages/Me/Index";
 import "./utils/iconfont";
 Vue.use(Router);
 const router = new Router({
@@ -19,34 +12,34 @@ const router = new Router({
 		},
 		{
 			path: "/home",
-			component: Home
+			component: resolve => require(["./pages/Home/Index"], resolve)
 		},
 		{
 			path: "/order",
-			component: Order
+			component: resolve => require(["./pages/Order/Index"], resolve)
 		},
 		{
 			path: "/info",
-			component: Info,
+			component: resolve => require(["./pages/Info/Index"], resolve),
 			redirect: "/info/message",
 			children: [
 				{
 					path: "message",
-					component: Message,
+					component: resolve => require(["./pages/Info/Message"], resolve),
 					meta: {
 						name: "消息"
 					}
 				},
 				{
 					path: "notice",
-					component: Notice,
+					component: resolve => require(["./pages/Info/Notice"], resolve),
 					meta: {
 						name: "提示"
 					}
 				},
 				{
 					path: "requirement",
-					component: Requirement,
+					component: resolve => require(["./pages/Info/Requirement"], resolve),
 					meta: {
 						name: "需求"
 					}
@@ -55,7 +48,15 @@ const router = new Router({
 		},
 		{
 			path: "/me",
-			component: Me
+			component: resolve => require(["./pages/Me/Index"], resolve)
+		},
+		{
+			path: "/sign_up",
+			component: resolve => require(["./pages/Sign/SignUp"], resolve)
+		},
+		{
+			path: "/sign_in",
+			component: resolve => require(["./pages/Sign/SignIn"], resolve)
 		}
 	]
 });

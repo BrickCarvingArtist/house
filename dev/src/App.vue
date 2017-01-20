@@ -39,14 +39,17 @@
 <template>
 	<div>
 		<router-view />
-		<my-footer />
+		<keep-alive>
+			<component :is="footer" />
+		</keep-alive>
 	</div>
 </template>
 <script>
-	import MyFooter from "./components/Footer";
 	export default {
-		components: {
-			MyFooter
+		data(){
+			return {
+				footer: 0
+			};
 		},
 		beforeCreate(){
 			document.documentElement.style.fontSize = `${innerWidth / 20}px`;

@@ -24,7 +24,8 @@ module.exports = {
     proxyTable: {
         "/api/": {
             target: "http://127.0.0.1:23333",
-            changeOrigin: true
+            changeOrigin: true,
+            cookieDomainRewrite: "http://127.0.0.1:8888"
         },
         "/images/": {
             target: "http://127.0.0.1:23333",

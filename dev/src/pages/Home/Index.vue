@@ -13,6 +13,7 @@
 	import MyFilter from "./components/Filter";
 	import Modal from "../../components/Modal";
 	import List from "../../components/List";
+	import MyFooter from "../../components/Footer";
 	export default {
 		data(){
 			return {
@@ -28,6 +29,7 @@
 		},
 		async beforeCreate(){
 			this.data = (await (await fetch("/api/house/get")).json()).data;
+			this.$parent.footer = MyFooter;
 		}
 	}
 </script>

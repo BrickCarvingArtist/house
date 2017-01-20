@@ -1,10 +1,12 @@
 import {Router} from "express";
+import {urlencoded} from "body-parser";
 import {SERVER_CONFIG} from "./config";
 const {
 	host,
 	port
 } = SERVER_CONFIG;
 const router = Router();
+const User = {};
 router
 	.route("/api/get_banner/:type")
 	.get(({params, query}, res) => {
@@ -148,5 +150,34 @@ router
 			data,
 			message: "ok"
 		});
+	});
+router
+	.route("/api/sign_up")
+	.post(urlencoded({
+		extended: 1
+	}), ({body}, res) => {
+		User[body.user] = body.password;
+		res.json({
+			code: 0,
+			message: "ok"
+		});
+	});
+router
+	.route("/api/sign_in")
+	.post(urlencoded({
+		extended: 1
+	}), ({body, session}, res) => {
+		if(User[body.user] === body.password){
+			Object.assign(session, body);
+			res.json({
+				code: 0,
+				message: "ok"
+			});
+		}else{
+			res.json({
+				code: 1,
+				message: "ok"
+			});
+		}
 	});
 export default router;
