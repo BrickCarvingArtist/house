@@ -51,6 +51,10 @@ const router = new Router({
 			component: resolve => require(["./pages/Me/Index"], resolve)
 		},
 		{
+			path: "/upload",
+			component: resolve => require(["./pages/Me/Upload"], resolve)
+		},
+		{
 			path: "/sign_up",
 			component: resolve => require(["./pages/Sign/SignUp"], resolve)
 		},

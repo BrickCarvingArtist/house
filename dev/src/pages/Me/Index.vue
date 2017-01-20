@@ -62,15 +62,15 @@
 			</svg>
 		</my-header>
 		<section class="section">
-			<router-link class="top" to="/sign_in">
-				<div class="avator" :style="`background-image:url(${avator})`">
-					<svg v-if="isSign" class="icon assessedbadge" aria-hidden="true">
+			<router-link class="top" :to="`${$parent.user.id||'/sign_in'}`">
+				<div class="avator" :style="`background-image:url(${$parent.user.url})`">
+					<svg v-if="$parent.user.id" class="icon assessedbadge" aria-hidden="true">
 						<use xlink:href="#icon-assessedbadge"></use>
 					</svg>
 				</div>
 				<div class="others">
-					<h1>{{name}}</h1>
-					<p v-if="isSign">
+					<h1>{{$parent.user.name||"点击登录／注册"}}</h1>
+					<p v-if="$parent.user.id">
 						<span>修改资料</span>
 						<svg class="icon survey" aria-hidden="true">
 							<use xlink:href="#icon-survey"></use>
@@ -100,11 +100,8 @@
 	export default {
 		data(){
 			return {
-				name: "点击登录／注册",
 				favorites: 0,
-				scores: 0,
-				isSign: 0,
-				avator: ""
+				scores: 0
 			};
 		},
 		components: {

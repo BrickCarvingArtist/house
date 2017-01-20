@@ -1,11 +1,16 @@
+import {resolve} from "path";
 import {Router} from "express";
 import {urlencoded} from "body-parser";
+import multer from "multer";
 import {SERVER_CONFIG} from "./config";
 const {
 	host,
 	port
 } = SERVER_CONFIG;
 const router = Router();
+const upload = multer({
+	dest: resolve(process.cwd(), "./upload/")
+});
 const User = {};
 router
 	.route("/api/get_banner/:type")
@@ -167,10 +172,19 @@ router
 	.post(urlencoded({
 		extended: 1
 	}), ({body, session}, res) => {
-		if(User[body.user] === body.password){
+		const {
+			user,
+			password
+		} = body;
+		if(User[user] === password){
 			Object.assign(session, body);
 			res.json({
 				code: 0,
+				data: {
+					id: parseInt(Math.random() * 100000),
+					name: user,
+					url: "/images/house/1.png"
+				},
 				message: "ok"
 			});
 		}else{
@@ -179,5 +193,14 @@ router
 				message: "ok"
 			});
 		}
+	});
+router
+	.route("/api/upload")
+	.post(upload.single("test"), ({file}, res) => {
+		res.json({
+			code: 0,
+			file,
+			message: "ok"
+		});
 	});
 export default router;

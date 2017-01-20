@@ -112,25 +112,22 @@
 			back(){
 				this.status = 0;
 			},
-			toast(options){
-				const modal = this.$parent.$refs.modal;
-				Object.assign(modal, options);
-			},
 			filter(index){
 				this.status = 1;
 				this.$el.querySelector("ul").childNodes[index].classList.toggle("current");
 			},
 			sort(e){
 				const {classList} = this.$el.querySelector("ul").lastElementChild;
+				const {modal} = this.$parent.$refs;
 				if(classList.contains("current")){
-					this.toast({
+					modal.toast({
 						message: "价格由高到低",
 						duration: 1500
 					});
 					this.$parent.data = this.$parent.data.reverse();
 					classList.remove("current");
 				}else{
-					this.toast({
+					modal.toast({
 						message: "价格由低到高",
 						duration: 1500
 					});

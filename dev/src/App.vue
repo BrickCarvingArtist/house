@@ -48,6 +48,7 @@
 	export default {
 		data(){
 			return {
+				user: {},
 				footer: 0
 			};
 		},

@@ -4,10 +4,12 @@
 		<input v-model="user" placeholder="用户名" />
 		<input type="password" v-model="password" placeholder="密码" />
 		<a @click="signUp">注册</a>
+		<modal ref="modal" type="fixed" />
 	</div>
 </template>
 <script>
 	import MyHeader from "../../components/Header";
+	import Modal from "../../components/Modal";
 	export default {
 		data(){
 			return {
@@ -17,6 +19,7 @@
 		},
 		methods: {
 			async signUp(){
+				const {modal} = this.$refs;
 				if((await (await fetch("/api/sign_up", {
 					method: "POST",
 					headers: {
@@ -25,14 +28,21 @@
 					body: `user=${this.user}&password=${this.password}`,
 					credentials: "include"
 				})).json()).code){
-					console.log("注册失败");
+					modal.toast({
+						message: "注册失败",
+						duration: 800,
+					});
 				}else{
-					console.log("注册成功");
+					modal.toast({
+						message: "注册成功",
+						duration: 800,
+					});
 				}
 			}
 		},
 		components: {
-			MyHeader
+			MyHeader,
+			Modal
 		},
 		beforeCreate(){
 			this.$parent.footer = 0;
