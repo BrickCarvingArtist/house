@@ -2,7 +2,7 @@ import {readFile} from "fs";
 export const l = function(){
 	return console.log(...arguments);
 };
-const readFileAsync = path => new Promise((resolve, reject) => {
+export const readFileAsync = path => new Promise((resolve, reject) => {
 	readFile(path, "utf-8", (err, file) => {
 		err && reject(err);
 		resolve(file);
