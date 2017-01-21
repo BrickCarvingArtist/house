@@ -19,6 +19,7 @@ var spinner = ora('building for production...')
 spinner.start()
 
 var assetsPath = path.join(config.build.assetsRoot, config.build.assetsSubDirectory)
+rm("-rf", path.resolve(assetsPath, "./images/public"));
 mv(path.resolve(assetsPath, "./images"), path.resolve(assetsPath, "../"));
 rm('-rf', assetsPath)
 mkdir('-p', assetsPath)
