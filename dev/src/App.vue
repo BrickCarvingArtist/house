@@ -38,6 +38,7 @@
 </style>
 <template>
 	<div>
+		<img src="./assets/1.png" />
 		<router-view />
 		<keep-alive>
 			<component :is="footer" />

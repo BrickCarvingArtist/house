@@ -19,8 +19,10 @@ var spinner = ora('building for production...')
 spinner.start()
 
 var assetsPath = path.join(config.build.assetsRoot, config.build.assetsSubDirectory)
+mv(path.resolve(assetsPath, "./images"), path.resolve(assetsPath, "../"));
 rm('-rf', assetsPath)
 mkdir('-p', assetsPath)
+mv(path.resolve(assetsPath, "../images"), path.resolve(assetsPath, "./images"))
 cp('-R', 'static/*', assetsPath)
 
 webpack(webpackConfig, function (err, stats) {

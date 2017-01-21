@@ -207,6 +207,6 @@ router
 router
 	.route("*")
 	.get(async (req, res) => {
-		res.end(await readFileAsync("./dev/dist/index.html"));
+		res.end(await readFileAsync("./pages/index.html"));
 	});
 export default router;

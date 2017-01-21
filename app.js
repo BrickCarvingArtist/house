@@ -5,7 +5,6 @@ import {SERVER_CONFIG} from "./config";
 import {l, createHTML} from "./utils";
 express()
 	.use(express.static("./static"))
-	.use(express.static("./dev/dist"))
 	.use(session({
 		secret: "house",
 		resave: 1,
